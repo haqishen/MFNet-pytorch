@@ -72,7 +72,7 @@ def train(epo, model, train_loader, optimizer):
 def validation(epo, model, val_loader):
     loss_avg = 0.
     acc_avg  = 0.
-    start_t = t = time.time()
+    start_t = time.time()
     model.eval()
     with torch.no_grad():
         for it, (images, labels, names) in enumerate(val_loader):
