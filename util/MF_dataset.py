@@ -11,7 +11,7 @@ from ipdb import set_trace as st
 
 class MF_dataset(Dataset):
 
-    def __init__(self, data_dir, split, input_h=480, input_w=640 ,transform=[]):
+    def __init__(self, data_dir, split, have_label, input_h=480, input_w=640 ,transform=[]):
         super(MF_dataset, self).__init__()
 
         assert split in ['train', 'val', 'test'], 'split must be "train"|"val"|"test"'
@@ -24,7 +24,7 @@ class MF_dataset(Dataset):
         self.input_h   = input_h
         self.input_w   = input_w
         self.transform = transform
-        self.is_train  = False if split == 'test' else True
+        self.is_train  = have_label
         self.n_data    = len(self.names)
 
 

@@ -104,12 +104,13 @@ def main():
     # optimizer = torch.optim.Adam(model.parameters(), lr=lr_start)
 
     if args.epoch_from > 1:
-        print('| loading model from %s ...' % checkpoint_model_file)
+        print('| loading checkpoint file %s... ' % checkpoint_model_file, end='')
         model.load_state_dict(torch.load(checkpoint_model_file, map_location={'cuda:0':'cuda:1'}))
         optimizer.load_state_dict(torch.load(checkpoint_optim_file))
+        print('done!')
 
-    train_dataset = MF_dataset(data_dir, 'train', transform=augmentation_methods)
-    val_dataset  = MF_dataset(data_dir, 'val')
+    train_dataset = MF_dataset(data_dir, 'train', have_label=True, transform=augmentation_methods)
+    val_dataset  = MF_dataset(data_dir, 'val', have_label=True)
 
     train_loader  = DataLoader(
         dataset     = train_dataset,
