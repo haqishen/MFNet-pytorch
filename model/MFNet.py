@@ -3,8 +3,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ipdb import set_trace as st
-
 
 class ConvBnLeakyRelu2d(nn.Module):
     # convolution
@@ -14,7 +12,6 @@ class ConvBnLeakyRelu2d(nn.Module):
         super(ConvBnLeakyRelu2d, self).__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, padding=padding, stride=stride, dilation=dilation, groups=groups)
         self.bn   = nn.BatchNorm2d(out_channels)
-        # nn.init.kaiming_normal_(self.conv.weight, mode='fan_out', nonlinearity='leaky_relu')
     def forward(self, x):
         return F.leaky_relu(self.bn(self.conv(x)), negative_slope=0.2)
 
@@ -37,7 +34,7 @@ class MiniInception(nn.Module):
 
 class MFNet(nn.Module):
 
-    def __init__(self, n_classes):
+    def __init__(self, n_class):
         super(MFNet, self).__init__()
         rgb_ch = [16,48,48,96,96]
         inf_ch = [16,16,16,36,36]
@@ -61,7 +58,7 @@ class MFNet(nn.Module):
         self.decode4     = ConvBnLeakyRelu2d(rgb_ch[3]+inf_ch[3], rgb_ch[2]+inf_ch[2])
         self.decode3     = ConvBnLeakyRelu2d(rgb_ch[2]+inf_ch[2], rgb_ch[1]+inf_ch[1])
         self.decode2     = ConvBnLeakyRelu2d(rgb_ch[1]+inf_ch[1], rgb_ch[0]+inf_ch[0])
-        self.decode1     = ConvBnLeakyRelu2d(rgb_ch[0]+inf_ch[0], n_classes)
+        self.decode1     = ConvBnLeakyRelu2d(rgb_ch[0]+inf_ch[0], n_class)
         
 
     def forward(self, x):
@@ -112,7 +109,7 @@ class MFNet(nn.Module):
 def unit_test():
     import numpy as np
     x = torch.tensor(np.random.rand(2,4,480,640).astype(np.float32))
-    model = MFNet(n_classes=9)
+    model = MFNet(n_class=9)
     y = model(x)
     print('output shape:', y.shape)
     assert y.shape == (2,9,480,640), 'output shape (2,9,480,640) is expected!'

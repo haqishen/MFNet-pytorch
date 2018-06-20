@@ -31,6 +31,7 @@ class MF_dataset(Dataset):
     def read_image(self, name, folder):
         file_path = os.path.join(self.data_dir, '%s/%s.png' % (folder, name))
         image     = np.asarray(Image.open(file_path)) # (w,h,c)
+        image.flags.writeable = True
         return image
 
     def get_train_item(self, index):
@@ -50,9 +51,9 @@ class MF_dataset(Dataset):
         name  = self.names[index]
         image = self.read_image(name, 'images')
         image = np.asarray(Image.fromarray(image).resize((self.input_w, self.input_h)), dtype=np.float32).transpose((2,0,1))/255
-        
+
         return torch.tensor(image), name
-    
+
 
     def __getitem__(self, index):
 
