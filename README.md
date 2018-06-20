@@ -16,11 +16,10 @@ MFNet is a light CNN architecture for multispectral images semantic segmentation
 ## Requirements
 
 ```
-pytorch 0.4.0
-PIL 4.3.0
-numpy 1.14.0
-tqdm 4.19.4
-
+* pytorch 0.4.0
+* PIL 4.3.0
+* numpy 1.14.0
+* tqdm 4.19.4
 ```
 ## Dataset
 
