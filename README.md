@@ -8,8 +8,6 @@ Project home page: https://www.mi.t.u-tokyo.ac.jp/static/projects/mil_multispect
 
 This is official pytorch implementation of [MFNet: Towards real-time semantic segmentation for autonomous vehicles with multi-spectral scenes](https://ieeexplore.ieee.org/document/8206396/) (IROS 2017). The pdf can be downloaded from [HERE](https://drive.google.com/file/d/1vxMh63QpdxPnG3jhzpQU0fb-2XOzHR-Z/view?usp=sharing) (Google Drive shared file). 
 
-chainer implementation can be found here: https://github.com/haqishen/MFNet-chainer
-
 ## Introduction
 
 MFNet is a light CNN architecture for multispectral images semantic segmentation, with ~ 1/40x parameters and 6x ~ inference speed, while providing similar or higher accuracy compared to SegNet.
