@@ -24,13 +24,15 @@ MFNet is a light CNN architecture for multispectral images semantic segmentation
 
 We published a new RGB-Thermal semantic segmentation dataset in support of further development of autonomous vehicles in the future. This dataset contains 1569 images (820 taken at daytime and 749 taken at nighttime) which is available in our [project home page](https://www.mi.t.u-tokyo.ac.jp/static/projects/mil_multispectral/)
 
-Importance: These .png images are contain 4 channels. Load they on these way and you will see it.
+**Importance** : These `.png` images are contain 4 channels. Load they on these way and you will see it.
 
 ```
 import numpy as np
 from PIL import Image
 im = Image.open('/path/to/dataset/01606D.png')
 print(np.asarray(im).shape)
+
+# (480, 640, 4)
 ```
 
 ## Usage
